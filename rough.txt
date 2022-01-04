@@ -1,0 +1,147 @@
+<script>
+
+    function clearThis(name) {
+
+        var ele = document.getElementsByName(name);
+        for (var i = 0; i < ele.length; i++) { ele[i].checked = false; }
+
+        var pill_id = 'pills-' + name + '-tab';
+        $('#cover-spin').show(0);
+        google.script.run.withSuccessHandler(answerRemoved).deleteAnswer(<?= row ?>, name, pill_id);
+
+    }
+
+    function answerRemoved(r) {
+        var result = r[0];
+        var pill_id = r[1];
+
+        if (result == 'SUCCESS') {
+            document.getElementById(pill_id).classList.remove("btn-success");
+        }
+        $('#cover-spin').hide(0);
+        document.getElementById('total').innerHTML = document.getElementsByClassName('btn-success').length;
+    }
+
+
+
+
+    function answer_selected(t) {
+        var v = t.value;
+        var id = t.id;
+        var name = t.name;
+
+        var pill_id = 'pills-' + name + '-tab';
+
+        $('#cover-spin').show(0);
+        google.script.run.withSuccessHandler(answerMarked).markAnswer(<?= row ?>, name, v, pill_id);
+    }
+    function answerMarked(r) {
+        var result = r[0];
+        var pill_id = r[1];
+
+        if (result == 'SUCCESS') {
+            document.getElementById(pill_id).classList.add("btn-success");
+        }
+        $('#cover-spin').hide(0);
+        document.getElementById('total').innerHTML = document.getElementsByClassName('btn-success').length;
+    }
+
+
+
+    function tabChangeMarked() {
+        $('#cover-spin').hide(0);
+    }
+
+
+
+
+
+
+    // Set the date we're counting down to
+    var countDownDate = new Date(<?= exam_end_time ?>).getTime();
+
+    // Update the count down every 1 second
+    var x = setInterval(function () {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the result in the element with id="demo"
+        document.getElementById("demo").innerHTML = hours + " : "
+            + minutes + " : " + seconds;
+
+        var act = document.getElementsByClassName('active');
+        if (act.length > 12) {
+            $('#cover-spin').show(0);
+            document.getElementById("sbmtBtn").style.display = 'none';
+            document.getElementById("question_section").style.display = 'none';
+            document.getElementById("maths_bio_section").style.display = 'none';
+            document.getElementById("refresh_section").style.display = 'block';
+
+        }
+
+        // If the count down is finished, write some text
+        if (distance < 0) {
+            clearInterval(x);
+
+            document.getElementById("question_section").style.display = 'none';
+            document.getElementById("maths_bio_section").style.display = 'none';
+            document.getElementById("time_up_section").style.display = 'block';
+            document.getElementById("demo").innerHTML = 'Time Up !!!';
+            document.getElementById("sbmtBtn").style.display = 'none';
+
+
+        }
+    }, 1000);
+
+    
+
+    function questionClicked() {
+        $('#cover-spin').show(0);
+        //sleep(2000);
+        $('#cover-spin').hide(0);
+        //google.script.run.withSuccessHandler(newQuestion).newQuestionCLicked();
+
+
+    }
+
+    function sleep(milliseconds) {
+        const date = Date.now();
+        let currentDate = null;
+        do {
+            currentDate = Date.now();
+        } while (currentDate - date < milliseconds);
+    }
+
+
+    function newQuestion() {
+        $('#cover-spin').hide(0);
+    }
+
+    function startNow() {
+        document.getElementById('question_section').classList.remove("d-none");
+
+        document.getElementById('sbmtBtn').classList.remove("d-none");
+        document.getElementById("instruction_section").style.display = 'none';
+    }
+
+
+</script>
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('total').innerHTML = document.getElementsByClassName('btn-success').length;
+            document.getElementById('modal_body').innerHTML = {{ setting_data.instruction_for_exam }};
+            document.getElementById('time_up_text').innerHTML = {{ setting_data.inst_when_time_out_during_exam }};
+            document.getElementById('submitted_text').innerHTML = {{ setting_data.msg_when_submit }};
+            document.getElementById('maths_bio_text').innerHTML = {{ setting_data.msg_when_submit }};
+
+        }, false);

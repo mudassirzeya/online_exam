@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title> </title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style id="compiled-css" type="text/css">
+        #cover-spin {
+            position: fixed;
+            width: 100%;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: 9999;
+            display: none;
+        }
+
+        @-webkit-keyframes spin {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #cover-spin::after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 48%;
+            top: 40%;
+            width: 40px;
+            height: 40px;
+            border-style: solid;
+            border-color: black;
+            border-top-color: transparent;
+            border-width: 4px;
+            border-radius: 50%;
+            -webkit-animation: spin .8s linear infinite;
+            animation: spin .8s linear infinite;
+        }
+
+        #cover-spin {
+            position: fixed;
+            width: 100%;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: 9999;
+            display: none;
+        }
+
+        @-webkit-keyframes spin {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #cover-spin::after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 48%;
+            top: 40%;
+            width: 40px;
+            height: 40px;
+            border-style: solid;
+            border-color: black;
+            border-top-color: transparent;
+            border-width: 4px;
+            border-radius: 50%;
+            -webkit-animation: spin .8s linear infinite;
+            animation: spin .8s linear infinite;
+        }
+
+
+
+
+
+
+
+        .btn-color {
+            background-color: #0e1c36;
+            color: #fff;
+
+        }
+
+        .profile-image-pic {
+            height: 200px;
+            width: 200px;
+            object-fit: cover;
+        }
+
+
+
+        .cardbody-color {
+            background-color: #ebf2fa;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /*
+*
+* ==========================================
+* FOR DEMO PURPOSE
+* ==========================================
+*/
+        body {
+            min-height: 100vh;
+            background: linear-gradient(to left, #dce35b, #45b649);
+        }
+
+        /* EOS */
+    </style>
+
+
+</head>
+
+<body>
+    <div id="cover-spin"></div>
+    <div class="container">
+        <div class="row d-none" id="login_section">
+            <div class="col-md-6 offset-md-3">
+                <div class="card my-5">
+
+                    <div class="card-body cardbody-color p-lg-5">
+
+                        <div class="text-center">
+                            <div class="text-center mb-2 text-dark">
+                                <H4>Lead Talent Search Exam<br>2022</H4>
+                            </div>
+                            <img src="https://pbs.twimg.com/profile_images/3324703164/eeaa07508ff278289e23ba278bbaa405_400x400.png"
+                                class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3" width="200px"
+                                alt="profile">
+                        </div>
+
+
+                        <div id="msg" class="w-100 ">
+                            <H3 style="text-align: center;">
+                                <span id="login_error" class="badge badge-danger"></span>
+                            </H3>
+                        </div>
+
+                        <div>
+                            <div class="mb-3">
+                                <label>Email ID</label>
+                                <input type="email" class="form-control" name="username" id="email" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label>Registration Number</label>
+                                <input type="text" class="form-control" name='password' id="password">
+                            </div>
+                            <div class="text-center">
+                                <span class="text-info" id="login_info" ></span>
+                            </div>
+                            <div class="text-center" id="btnDiv">
+                                <button id="hrefbtn" type="button" value="" target="_top" class="btn btn-color px-5 mb-5 w-100" style="color:white"
+                                    onclick="roundround()">
+                                    Log In
+                                </button>
+                                {% if setting.allow_registration == 'YES' %}
+                                <a onclick="go_to_signup()">New User ? Register here</a>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <!--instruction page-->
+        <div class="row" id="instruction_section">
+            <br><br>
+            <div class="col">
+                <br><br><br>
+                <div class="alert alert-warning" role="alert" id="instruction_text">
+                </div>
+                <br>
+                <button type="button" class="btn btn-primary btn-block" onclick="startNow()">Click Here to Start the
+                    Exam</button>
+            </div>
+
+        </div>
+        <!--instructio page End-->
+        
+        <!-- Registration page -->
+        <div class="row d-none" id="register_section">
+            <div class="col-md-6 offset-md-3">
+                <div class="card my-5">
+                    <div class="card-body cardbody-color p-lg-5">
+                        <div class="text-center">
+                            <div class="text-center mb-2 text-dark">
+                                <H4>Lead Talent Search Exam<br>2022</H4>
+                            </div>
+                            <img src="https://pbs.twimg.com/profile_images/3324703164/eeaa07508ff278289e23ba278bbaa405_400x400.png"
+                                class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3" width="200px"
+                                alt="profile">
+                        </div>
+                        <div id="msg" class="w-100 ">
+                            {% for message in messages %}
+                            <H3 style="text-align: center;">
+                                <span class="badge badge-danger">{{message}}</span>
+                            </H3>
+                            {% endfor %}
+                        </div>
+        
+                        <form>
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label>Email ID</label>
+                                <input type="email" class="form-control" name="email" id="new_email"
+                                    aria-describedby="emailHelp" required>
+                            </div>
+                            <div class="mb-3">
+                                <label>Name</label>
+                                <input type="text" class="form-control" name='name' id="new_name" required>
+                            </div>
+                            <div class="text-center">
+                                <span class="text-danger text-center" id="register_error"></span>
+                            </div>
+                            <div class="text-center" id="btnDiv">
+                                <button id="hrefbtn" type="button" value="" target="_top"
+                                    class="btn btn-color px-5 mb-5 w-100" style="color:white" onclick="student_registration()">
+                                    Register Account
+                                </button>
+                                <a href="{% url 'student_login' %}">Already have an account ? </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+        
+            </div>
+        </div>
+        <!-- end registration page  -->
+    </div>
+
+    <script>
+
+        function roundround() {
+            $('#cover-spin').show(0);
+            var btn = document.getElementById('hrefbtn').innerHTML = 'Logging In. Please wait...';
+            var password = document.getElementById('password').value;
+            var email = document.getElementById('email').value;
+            var user_data = [];
+
+            try {
+                user_info = {
+                    password: password,
+                    email: email,
+                }
+                if (user_info.password.length > 0 && user_info.email.length > 0) {
+                    user_data.push(user_info);
+                } else {
+                    document.getElementById('login_info').innerHTML = 'Please fill the input';
+                }
+            } catch (e) { }
+            // $('#cover-spin').show(0);
+
+            fetch("/student_login/", {
+                method: "POST",
+                body: JSON.stringify({
+                    data_obj: user_data,
+                }),
+                // Adding headers to the request
+                headers: {
+                    "Content-type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}",
+                },
+            })
+                .then((response) => {
+                    console.log(response);
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                        return;
+                    }
+
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log("Success: ", data);
+                    if (data.msg == 'not_started') {
+                        document.getElementById('login_error').innerHTML = data.error_msg;
+                        $('#cover-spin').hide(0);
+                    }
+                    else if (data.msg == 'over') {
+                        document.getElementById('login_error').innerHTML = data.error_msg;
+                        $('#cover-spin').hide(0);
+                    }
+                    else if ( data.msg == 'wrong'){
+                        document.getElementById('login_error').innerHTML = "Wrong Username or Password !"
+                        $('#cover-spin').hide(0);
+                    }
+                    else {
+                        $('#cover-spin').hide(0);
+                    }
+                });
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('instruction_text').innerHTML = 'Your Exam Will start shortly..' ;
+
+
+        }, false);
+
+
+        function startNow() {
+            document.getElementById('login_section').classList.remove("d-none");
+
+            document.getElementById("instruction_section").style.display = 'none';
+        }
+
+        function student_registration(){
+            var name = document.getElementById('new_name').value;
+            var email = document.getElementById('new_email').value;
+            var user_data = [];
+
+            try {
+                user_info = {
+                    name: name,
+                    email: email,
+                }
+                if (user_info.name.length > 0 && user_info.email.length > 0) {
+                    user_data.push(user_info);
+                }else{
+                    document.getElementById('register_error').innerHTML = 'Please fill the input';
+                }
+            } catch (e) { }
+            $('#cover-spin').show(0);
+
+            fetch("/student_register/", {
+                method: "POST",
+                body: JSON.stringify({
+                    data_obj: user_data,
+                }),
+                // Adding headers to the request
+                headers: {
+                    "Content-type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}",
+                },
+            })
+                .then((response) => {
+                    console.log(response);
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                        return;
+                    }
+
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log("Success: ", data);
+                    if (data.msg == 'success') {
+                        document.getElementById('register_section').classList.add("d-none");
+                        document.getElementById('login_section').classList.remove("d-none");
+                        document.getElementById('login_info').innerHTML = 'The account is created successfully , your Password is "12345" ';
+                        $('#cover-spin').hide(0);
+                    }
+                    else if(data.msg == 'already'){
+                        document.getElementById('register_error').innerHTML = 'This Email Id is already in use';
+                         $('#cover-spin').hide(0);
+                    }
+                    else {
+                        document.getElementById('register_error').innerHTML = "Something went Wrong Please Register Again"
+                        // document.getElementById('refresh_section').classList.remove("d-none");
+                        $('#cover-spin').hide(0);
+                    }
+                });
+        }
+
+        function go_to_signup(){
+            document.getElementById('register_section').classList.remove("d-none");
+            document.getElementById('login_section').classList.add("d-none");
+        }
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title></title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style id="compiled-css" type="text/css">
+        #cover-spin {
+            position: fixed;
+            width: 100%;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: 9999;
+            display: none;
+        }
+
+        @-webkit-keyframes spin {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #cover-spin::after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 48%;
+            top: 40%;
+            width: 40px;
+            height: 40px;
+            border-style: solid;
+            border-color: black;
+            border-top-color: transparent;
+            border-width: 4px;
+            border-radius: 50%;
+            -webkit-animation: spin .8s linear infinite;
+            animation: spin .8s linear infinite;
+        }
+
+        #cover-spin {
+            position: fixed;
+            width: 100%;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-color: rgba(255, 255, 255, 0.7);
+            z-index: 9999;
+            display: none;
+        }
+
+        @-webkit-keyframes spin {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #cover-spin::after {
+            content: '';
+            display: block;
+            position: absolute;
+            left: 48%;
+            top: 40%;
+            width: 40px;
+            height: 40px;
+            border-style: solid;
+            border-color: black;
+            border-top-color: transparent;
+            border-width: 4px;
+            border-radius: 50%;
+            -webkit-animation: spin .8s linear infinite;
+            animation: spin .8s linear infinite;
+        }
+
+        /*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*/
+        .nav-pills-custom .nav-link {
+            color: #aaa;
+            background: #fff;
+            position: relative;
+        }
+
+        .nav-pills-custom .nav-link.active {
+            color: #45b649;
+            background: #fff;
+        }
+
+        .done {
+            color: #45b649;
+            background: #E10D1A;
+        }
+
+
+        /* Add indicator arrow for the active tab */
+        @media (min-width: 992px) {
+            .nav-pills-custom .nav-link::before {
+                content: '';
+                display: block;
+                border-top: 8px solid transparent;
+                border-left: 10px solid #fff;
+                border-bottom: 8px solid transparent;
+                position: absolute;
+                top: 50%;
+                right: -10px;
+                transform: translateY(-50%);
+                opacity: 0;
+            }
+        }
+
+        .nav-pills-custom .nav-link.active::before {
+            opacity: 1;
+        }
+
+
+
+
+
+        /*
+*
+* ==========================================
+* FOR DEMO PURPOSE
+* ==========================================
+*/
+        body {
+            min-height: 100vh;
+            background: linear-gradient(to left, #dce35b, #45b649);
+
+        }
+
+        .form-check .form-check-input[type=radio] {
+            border-radius: 100%;
+            height: 50px;
+            width: 50px;
+        }
+
+
+        .form-check {
+            display: flex;
+        }
+
+
+        label {
+            margin-left: 50px;
+            margin-top: 15px;
+        }
+
+        /* EOS */
+
+        #videoElement {
+
+            border: 2px solid white;
+            width: 300px;
+
+            margin: auto !important
+        }
+
+        body .modal-dialog {
+            /* Width */
+            max-width: 100%;
+            width: auto !important;
+            display: inline-block;
+            overflow-x: auto;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <div id="cover-spin"></div>
+    <!-- Demo header-->
+    <section class="py-1 header">
+        <div class="container py-1">
+
+            <!--Header Items --->
+            <div class="row">
+                <div class="col-sm">
+                    <header class="text-center pb-4 text-white">
+                        <h3 style="line-height: normal;">
+                            <img src="https://pbs.twimg.com/profile_images/3324703164/eeaa07508ff278289e23ba278bbaa405_400x400.png"
+                                class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3" width="50px">
+                            Lead Talent Search Exam 2022
+                        </h3>
+                        <H4 class="mb-1"><span class="badge badge-success">
+                                {{user_data.name}}
+                            </span> Attempted <span class="badge badge-success"> <span id="total"></span>/
+                                {{questions_count}}
+                            </span> </H4>
+
+                        Total Tab Switch <span class="badge badge-danger" id="total_tab_switch">
+                            {{user_data.tabs_switch}}
+                        </span>
+                        <br>
+                        <button type="button" class="btn btn-link btn-sm" data-toggle="modal"
+                            data-target="#exampleModal">
+                            <b>IMPORTANT: View Instruction for Exam</b>
+                        </button>
+                        <br>
+                        <H6><span>Time Left: </span><span id="demo"></span></H6>
+                        <button type="button" class=" btn btn-primary btn-block" id="sbmtBtn"
+                        onclick="submit_and_exit()">
+                            Submit & Exit
+                        </button>
+                    </header>
+                </div>
+                <div class="col-sm justify-content-center">
+                    <header class="text-center pb-4 text-white" id="video_section">
+                        <div id="container" class="justify-content-center w-100">
+                            <span style="color:red">You <b>MUST</b> be in front of camera during the exam.</span>
+                            <video class="justify-content-center" autoplay="true" id="videoElement"></video>
+                        </div>
+                    </header>
+                </div>
+            </div>
+            <!-- Header End--->
+
+
+
+
+            <div class="row" id="maths_bio_section">
+                <div class="col"></div>
+                <div class="col-md-12">
+                    <div class="alert alert-primary W-100" role="alert" id="maths_bio_text">
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+
+
+
+            <!-- Question section-->
+            <div class="row" id="question_section">
+                <br>
+                <div class="col-md-3">
+                    <!-- Tabs nav -->
+                    <div class="nav flex-column nav-pills nav-pills-custom" id="v-pills-tab" role="tablist"
+                        aria-orientation="vertical">
+
+                        {% for section in user_atempt %}
+                        <a class="nav-link mb-3 p-3 shadow {% if forloop.counter == 1 %} active {% endif %}"
+                            id="v-pills-{{section.0.id}}-tab" data-toggle="pill" href="#v-pills-{{section.0.id}}"
+                            role="tab" aria-controls="v-pills-{{section.0.id}}"
+                            aria-selected="{% if forloop.counter == 1 %}true{% else %}false{% endif %}">
+                            <i class="fa fa-book mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">
+                                {{section.0.section}}
+                            </span></a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+
+                <div class="col-md-9">
+                    <!-- Tabs content -->
+                    <div class="tab-content" id="v-pills-tabContent">
+                {% for section in user_atempt %}
+                <div class="tab-pane fade shadow rounded bg-white 
+                {% if forloop.counter == 1 %} show active {% endif %} p-1" id="v-pills-{{section.0.id}}"
+                    role="tabpanel" aria-labelledby="v-pills-{{section.0.id}}-tab">
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        {% for question in section.1 %}
+                        <li class="nav-item">
+                            <a
+                                class="m-1 nav-link {% if  question.answer != 'no'  %} btn-success {% endif %} 
+                                {% if forloop.counter == 1 %} active {% endif %}"
+                                id="pills-{{question.question.id}}-tab" data-toggle="pill" href="#pills-{{question.question.id}}" role="tab"
+                                aria-controls="pills-{{question.question.id}}"
+                                aria-selected="{% if forloop.counter == 1 %} true {% else %} false {% endif %}">
+                                {{forloop.counter}}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        {% for question in section.1 %}
+                        <div class="tab-pane fade {% if forloop.counter == 1 %}show active {% endif %} " id="pills-{{question.question.id}}" role="tabpanel"
+                            aria-labelledby="pills-{{question.question.id}}-tab">
+                            <div class="card">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        <span style=" white-space: pre-wrap;">{{question.question.question_text}}</span>
+                                        {% if question.question.question_image|length > 5 %}
+                                        <br><img src="{{question.question.question_image}}"
+                                            style="max-width:100%">
+                                        {% endif %}
+                                        <br>
+                                        <span class="badge badge-info float-right">
+                                            {{question.question.marks}}
+                                            {% if question.question.marks == 1 %}
+                                                Mark
+                                            {% else %}
+                                                Marks
+                                            {% endif %}
+                                        </span>
+                                    </li>
+                                    <li class="list-group-item">
+                    
+                                        <div class="form-check mb-2 p-20 pb-4 pl-4 border border-success">
+                                            <input class="form-check-input" type="radio" name="{{question.question.id}}"
+                                                id="{{question.question.id}}_A" value="a" onchange="answer_selected(this)"
+                                                {% if question.answer == 'a' %}
+                                                    checked
+                                                {% endif %}
+                                           
+                                            >
+                                            <label class="form-check-label" for="{{question.id}}_A">
+                                                <span style=" white-space: pre-wrap;">{{question.question.option_a}} </span>
+                                                {% if question.question.option_a_image|length > 5 %}
+                                                <br><img src="{{question.question.option_a_image}}" style="max-width:100%">
+                                                {% endif %}
+                                            </label>
+                                        </div>
+                    
+                                        <div class="form-check mb-2 p-20 pb-4 pl-4 border border-success">
+                                            <input class="form-check-input" type="radio" 
+                                            name="{{question.question.id}}"
+                                                id="{{question.question.id}}_B" value="b" onchange="answer_selected(this)"
+                                                {% if question.answer == 'b' %}
+                                                    checked
+                                                {% endif %}
+                                            >
+                                            <label class="form-check-label" for="{{question.question.id}}_B">
+                                                <span style=" white-space: pre-wrap;">{{question.question.option_b}}</span>
+                                                {% if question.question.option_b_image|length > 5 %}
+                                                <br><img src="{{question.question.option_b_image}}" style="max-width:100%">
+                                                {% endif %}
+                                            </label>
+                                        </div>
+                    
+                                        <div class="form-check mb-2 p-20 pb-4 pl-4 border border-success">
+                                            <input class="form-check-input" type="radio" name="{{question.question.id}}"
+                                                id="{{question.question.id}}_C" value="c" onchange="answer_selected(this)" 
+                                                {% if question.answer == 'c' %}
+                                                    checked
+                                                {% endif %}
+                                            >
+                                            <label class="form-check-label" for="{{question.question.id}}_C">
+                                                <span style=" white-space: pre-wrap;">{{question.question.option_c}}</span>
+                                                {% if question.question.option_c_image|length > 5 %}
+                                                <br><img src="{{question.question.option_c_image}}" style="max-width:100%">
+                                                {% endif %}
+                                            </label>
+                                        </div>
+                    
+                                        <div class="form-check mb-2 p-20 pb-4 pl-4 border border-success">
+                                            <input class="form-check-input" type="radio" name="{{question.question.id}}"
+                                                id="{{question.question.id}}_D" value="d" onchange="answer_selected(this)"
+                                                {% if question.answer == 'd' %}
+                                                    checked
+                                                {% endif %}
+                                            >
+                                            <label class="form-check-label" for="{{question.question.id}}_D">
+                                                <span style=" white-space: pre-wrap;">{{question.question.option_d}}</span>
+                                                {% if question.question.option_d_image|length > 5 %}
+                                                <br><img src="{{question.question.option_d_image}}" style="max-width:100%">
+                                                {% endif %}
+                                            </label>
+                                        </div>
+                                        <br><br>
+                                        <button id="{{question.question.id}}_clear" onclick="clearThis('{{question.question.id}}')" type="button"
+                                            class="btn btn-danger btn-sm">
+                                            Clear Answer
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                       {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+                </div>
+                </div>
+            </div>
+            <!-- Questions End--->
+
+
+            <!--Time Up Message-->
+            <div class="row" style="display:none" id="time_up_section">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="alert alert-warning" role="alert" id="time_up_text">
+                       
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+            <!--Time up msg End-->
+
+            <!--Submitted Message-->
+            <div class="row" style="display:none" id="submitted_section">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="alert alert-warning" role="alert" id="submitted_text">
+                        
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+            <!--Submitted End-->
+
+            <!--refresh the page Message-->
+            <div class="row d-none" id="refresh_section">
+                <div class="col"></div>
+                <div class="col">
+                    <div class="alert alert-warning" role="alert" id="refresh_text">Please Refresh the Page to Continue
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+            <!--refresh the page End-->
+
+
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Instructions</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal_body">
+                    instruction
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    
+<script>
+    var video = document.querySelector("#videoElement");
+
+    if (navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                video.srcObject = stream;
+            })
+            .catch(function (err0r) {
+                console.log("Something went wrong!");
+            });
+    }
+
+    document.addEventListener("visibilitychange", event => {
+        if (document.visibilityState == "visible" || document.visibilityState == "prerender") {
+            console.log("tab is active")
+        } else {
+
+            if (document.getElementById("sbmtBtn").style.display.toString().trim().toLowerCase() != 'none') {
+                var tab_switch_div = document.getElementById('total_tab_switch');
+                var current_number = 0;
+                try { current_number = parseInt(tab_switch_div.innerHTML) } catch (e) { }
+                if (isNaN(current_number)) { current_number = 0 }
+                var new_number = current_number + 1;
+                tab_switch_div.innerHTML = new_number;
+                $('#cover-spin').show(0);
+
+                fetch("/tabs_switch/", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        data_obj: 'switched',
+                    }),
+                    // Adding headers to the request
+                    headers: {
+                        "Content-type": "application/json",
+                        "X-CSRFToken": "{{ csrf_token }}",
+                    },
+                })
+                    .then((response) => {
+                        console.log(response);
+                        if (response.redirected) {
+                            window.location.href = response.url;
+                            return;
+                        }
+
+                        return response.json();
+                    })
+                    .then((data) => {
+                        console.log("Success: ", data);
+                        if (data.msg == 'success') {
+                            $('#cover-spin').hide(0);
+                        }
+                        else {
+                            document.getElementById('refresh_text').innerHTML = "Something went Wrong please refresh the page"
+                            document.getElementById('refresh_section').classList.remove("d-none");
+                            $('#cover-spin').hide(0);
+                        }
+                    });
+
+                // google.script.run.withSuccessHandler(tabChangeMarked).markTabChange(<?= row ?>, new_number);
+            }
+
+        }
+    });
+
+    function submit_and_exit() {
+            document.getElementById("sbmtBtn").style.display = 'none';
+            document.getElementById("question_section").style.display = 'none';
+            document.getElementById("maths_bio_section").style.display = 'none';
+            document.getElementById("submitted_section").style.display = 'block';
+            document.getElementById("video_section").style.display = 'none'; 
+            logout_user();  
+        }
+    
+    function answer_selected(t){
+        $('#cover-spin').show(0);
+        var question_id = t.id.split('_')[0];
+        var answer = t.value;
+        var pill_id = 'pills-' + t.name + '-tab';
+        var user_data = [];
+
+        try {
+            user_attend = {
+                question: question_id,
+                user_answer: answer,
+            }
+            if (user_attend.question.length > 0 && user_attend.user_answer.length > 0) {
+                user_data.push(user_attend);
+            }
+        } catch (e) { }
+
+
+        fetch("/", {
+            method: "POST",
+            body: JSON.stringify({
+                data_obj: user_data,
+            }),
+            // Adding headers to the request
+            headers: {
+                "Content-type": "application/json",
+                "X-CSRFToken": "{{ csrf_token }}",
+            },
+        })
+            .then((response) => {
+                console.log(response);
+                if (response.redirected) {
+                    window.location.href = response.url;
+                    return;
+                }
+
+                return response.json();
+            })
+            .then((data) => {
+                console.log("Success: ", data);
+                if (data.msg == 'success') {
+                    document.getElementById(pill_id).classList.add("btn-success");
+                    document.getElementById('total').innerHTML = document.getElementsByClassName('btn-success').length;
+                    $('#cover-spin').hide(0);
+                }
+                else {
+                    document.getElementById('refresh_text').innerHTML = "Something went Wrong please refresh the page"
+                    document.getElementById('refresh_section').classList.remove("d-none");
+                    $('#cover-spin').hide(0);
+                }
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('total').innerHTML = document.getElementsByClassName('btn-success').length;
+        document.getElementById('modal_body').innerHTML = '{{setting_data.instruction_for_exam }}';
+        document.getElementById('time_up_text').innerHTML = '{{ setting_data.inst_when_time_out_during_exam }}';
+        document.getElementById('submitted_text').innerHTML = '{{ setting_data.msg_when_submit }}';
+        document.getElementById('maths_bio_text').innerHTML = '{{ setting_data.math_and_bio }}';
+
+        }, false);
+
+    
+
+        // Set the date we're counting down to
+        var countDownDate = '{{millisec}}';
+
+        // Update the count down every 1 second
+        var x = setInterval(function () {
+
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="demo"
+            document.getElementById("demo").innerHTML = hours + " : "
+                + minutes + " : " + seconds;
+
+            var act = document.getElementsByClassName('active');
+            if (act.length > 12) {
+                $('#cover-spin').show(0);
+                document.getElementById("sbmtBtn").style.display = 'none';
+                document.getElementById("question_section").style.display = 'none';
+                document.getElementById("maths_bio_section").style.display = 'none';
+                document.getElementById("refresh_section").style.display = 'block';
+
+            }
+
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("question_section").style.display = 'none';
+                document.getElementById("maths_bio_section").style.display = 'none';
+                document.getElementById("time_up_section").style.display = 'block';
+                document.getElementById("demo").innerHTML = 'Time Up !!!';
+                document.getElementById("sbmtBtn").style.display = 'none';
+                logout_user();
+            }
+        }, 1000);
+
+        function logout_user(){
+            fetch("/logout_user/", {
+                method: "POST",
+                body: JSON.stringify({
+                    data_obj: 'switched',
+                }),
+                // Adding headers to the request
+                headers: {
+                    "Content-type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}",
+                },
+            })
+                .then((response) => {
+                    console.log(response);
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                        return;
+                    }
+
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log("Success: ", data);
+                    // if (data.msg == 'success') {
+                    //     $('#cover-spin').hide(0);
+                    // }
+                    // else {
+                    //     $('#cover-spin').hide(0);
+                    // }
+                });
+
+        }
+
+
+        function clearThis(t){
+            var question_id = t;
+            var ele = document.getElementsByName(t);
+            for (var i = 0; i < ele.length; i++) { ele[i].checked = false; }
+            var pill_id = 'pills-' + t + '-tab';
+            $('#cover-spin').show(0);
+            fetch("/clear_answer/", {
+                method: "POST",
+                body: JSON.stringify({
+                    data_obj: question_id,
+                }),
+                // Adding headers to the request
+                headers: {
+                    "Content-type": "application/json",
+                    "X-CSRFToken": "{{ csrf_token }}",
+                },
+            })
+                .then((response) => {
+                    console.log(response);
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                        return;
+                    }
+
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log("Success: ", data);
+                    if (data.msg == 'success') {
+                        document.getElementById(pill_id).classList.remove("btn-success");
+                        document.getElementById('total').innerHTML = document.getElementsByClassName('btn-success').length;
+                        $('#cover-spin').hide(0);
+                    }
+                    else {
+                        document.getElementById('refresh_text').innerHTML = "Something went Wrong please refresh the page"
+                        document.getElementById('refresh_section').classList.remove("d-none");
+                        $('#cover-spin').hide(0);
+                    }
+                });
+        }
+
+
+</script>
+
+</body>
+
+</html>
